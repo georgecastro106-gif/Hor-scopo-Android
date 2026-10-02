@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">Horoscopo-Android</string>
+
+    <string name="horoscope_name_aries">Aries</string>
+    <string name="horoscope_date_aries">21 marzo - 19 abril</string>
+
+    <string name="horoscope_name_tauro">Tauro</string>
+    <string name="horoscope_date_tauro">20 abril - 20 mayo</string>
+
+    <string name="horoscope_name_geminis">Géminis</string>
+    <string name="horoscope_date_geminis">21 mayo - 20 junio</string>
+
+    <string name="horoscope_name_cancer">Cáncer</string>
+    <string name="horoscope_date_cancer">21 junio - 22 julio</string>
+
+    <string name="horoscope_name_leo">Leo</string>
+    <string name="horoscope_date_leo">23 julio - 22 agosto</string>
+
+    <string name="horoscope_name_virgo">Virgo</string>
+    <string name="horoscope_date_virgo">23 agosto - 22 septiembre</string>
+
+    <string name="horoscope_name_libra">Libra</string>
+    <string name="horoscope_date_libra">23 septiembre - 22 octubre</string>
+
+    <string name="horoscope_name_escorpio">Escorpio</string>
+    <string name="horoscope_date_escorpio">23 octubre - 21 noviembre</string>
+
+    <string name="horoscope_name_sagitario">Sagitario</string>
+    <string name="horoscope_date_sagitario">22 noviembre - 21 diciembre</string>
+
+    <string name="horoscope_name_capricornio">Capricornio</string>
+    <string name="horoscope_date_capricornio">22 diciembre - 19 enero</string>
+
+    <string name="horoscope_name_acuario">Acuario</string>
+    <string name="horoscope_date_acuario">20 enero - 18 febrero</string>
+
+    <string name="horoscope_name_piscis">Piscis</string>
+    <string name="horoscope_date_piscis">19 febrero - 20 marzo</string>
 </resources>
