@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Horoscopo-Android</string>
+    <string name="app_name">Horóscopo</string>
 
     <string name="horoscope_name_aries">Aries</string>
     <string name="horoscope_date_aries">21 marzo - 19 abril</string>
@@ -36,4 +36,8 @@
 
     <string name="horoscope_name_piscis">Piscis</string>
     <string name="horoscope_date_piscis">19 febrero - 20 marzo</string>
+
+    <string name="menu_search">Buscar</string>
+    <string name="menu_favorite">Favorito</string>
+    <string name="menu_share">Compartir</string>
 </resources>

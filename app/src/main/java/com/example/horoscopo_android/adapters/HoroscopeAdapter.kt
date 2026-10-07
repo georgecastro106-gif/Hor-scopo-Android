@@ -1,4 +1,4 @@
-package com.example.horoscopo_android
+package com.example.horoscopo_android.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,9 +6,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo_android.R
+import com.example.horoscopo_android.data.Horoscope
 
 class HoroscopeAdapter(
-    val items: List<Horoscope>,
+    var items: List<Horoscope>,
     val onItemClick: (position: Int) -> Unit
 ) : RecyclerView.Adapter<HoroscopeViewHolder>() {
 
@@ -29,6 +30,11 @@ override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
 override fun getItemCount(): Int {
     return items.size
     }
+
+    fun updateData(dataSet: List<Horoscope>){
+        items = dataSet
+        notifyDataSetChanged()
+    }
 }
 
 
@@ -37,6 +43,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val signImageView: ImageView = view.findViewById(R.id.signImageView)
     val nameTextView: TextView = view.findViewById(R.id.nameTextView)
     val datesTextView : TextView = view.findViewById(R.id.datesTextView)
+
 
     fun render(horoscope: Horoscope) {
         nameTextView.setText(horoscope.name)
