@@ -1,8 +1,11 @@
 package com.example.horoscopo_android.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +13,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.horoscopo_android.data.Horoscope
 import com.example.horoscopo_android.R
+import com.example.horoscopo_android.utils.SessionManager
 
 class DetailActivity : AppCompatActivity() {
+
+    lateinit var session: SessionManager
+
+    lateinit var horoscope: Horoscope
+    var isFavorite = false
+    lateinit var favoriteMenuItem: MenuItem
+    lateinit var signImageView: ImageView
+    lateinit var nameTextView: TextView
+    lateinit var datesTextView : TextView
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,21 +38,37 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
+        signImageView = findViewById(R.id.signImageView)
+        nameTextView = findViewById(R.id.nameTextView)
+        datesTextView = findViewById(R.id.datesTextView)
+
+
+        session = SessionManager(this)
+
         val id = intent.getStringExtra("HOROSCOPE_ID")!!
 
-        val horoscope = Horoscope.getByID(id)
+        horoscope = Horoscope.getByID(id)
 
         supportActionBar?.setTitle(horoscope.name)
         supportActionBar?.setSubtitle(horoscope.dates)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
+        nameTextView.setText(horoscope.name)
+        datesTextView.setText(horoscope.dates)
+        signImageView.setImageResource(horoscope.sign)
+
+        isFavorite = session.isFavorite(id)
     }
 
 
 
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_detail_menu, menu)
+
+        favoriteMenuItem = menu.findItem((R.id.menu_favorite))
+
+        setFavoriteIcon()
         return true
     }
 
@@ -48,18 +80,38 @@ class DetailActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_favorite -> {
-                Toast.makeText(this, "Favorito", Toast.LENGTH_SHORT).show()
 
+                if(isFavorite) {
+                    session.setFavorite("")
+                } else {
+                    session.setFavorite(horoscope.id)
+                }
+                isFavorite = !isFavorite
+                setFavoriteIcon()
                 true
             }
 
             R.id.menu_share-> {
-                Toast.makeText(this, "Compartir", Toast.LENGTH_SHORT).show()
+                val sendIntent = Intent()
+                sendIntent.action = Intent.ACTION_SEND
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my horoscope: ${getString(horoscope.name)}")
+                sendIntent.type = "text/plain"
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
 
                 true
             }
 
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun setFavoriteIcon() {
+        if(isFavorite) {
+          favoriteMenuItem.setIcon(R.drawable.ic_favorite_selected)
+        } else {
+            favoriteMenuItem.setIcon(R.drawable.ic_favorite)
         }
     }
 }
